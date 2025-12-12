@@ -71,7 +71,7 @@ const LoginPage = () => {
             {/* RIGHT — IMAGE */}
             <div className="col-md-6 text-center">
               <img
-                src="/public/Login/hero-2.png"
+                src="/Login/hero-2.png"
                 alt="Books Illustration"
                 className="illustration-img"
               />
