@@ -1,106 +1,88 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Form, Button } from "react-bootstrap";
 import "../../Styles/Login/UserLogin.css";
+import { useNavigate } from "react-router-dom";
 
-export default function UserLogin() {
+const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPass, setShowPass] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // TODO: validate / call API
-    // Example: redirect to dashboard on success
-    navigate("/Dashboard");
-  };
-
   return (
-    <div className="login-page">
-      {/* LEFT: animated text */}
-      <aside className="login-left">
-        <div className="left-content">
-          <h1 className="title">Welcome to LibraryUI</h1>
-          <p className="subtitle">
-            Fast, secure and beautiful library management — take control of your
-            collections, users and reports from one intuitive dashboard.
-          </p>
-          <ul className="features">
-            <li>Modern dashboard</li>
-            <li>Realtime notifications</li>
-            <li>Easy user management</li>
-          </ul>
-        </div>
-      </aside>
+    <div className="login-wrapper">
+      <div className="login-box">
 
-      {/* RIGHT: glass login form */}
-      <main className="login-right">
-        <div className="glass-card" role="region" aria-label="Login form">
-          <div className="brand">
-            <img src="/logo192.png" alt="logo" className="brand-logo" />
-            <span className="brand-name">LibraryUI</span>
+        {/* SECTION 1 — HEADER */}
+        <div className="section-block mb-3">
+          <div className="d-flex justify-content-between align-items-center">
+            <h4 className="brand mb-0">
+              <span className="brand-orange">Library</span>Manegement
+            </h4>
+            <div>
+              <span className="text-muted small me-2">No account?</span>
+              <Button className="btn-signup" onClick={()=>navigate('/Pages/Login/Registerpage')}>Sign Up</Button>
+            </div>
           </div>
+        </div>
 
-          <h2 className="card-title">Sign in</h2>
+        {/* SECTION 2 — FORM + IMAGE */}
+        <div className="section-block mb-3 p-4">
+          <div className="row g-4 align-items-center">
 
-          <form onSubmit={handleSubmit} className="login-form">
-            <div className="form-group">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="form-control"
-                placeholder="you@domain.com"
-                aria-required="true"
+            {/* LEFT — FORM */}
+            <div className="col-md-6 ps-3">
+              <h3 className="login-title mb-3">Log In</h3>
+
+              <Form>
+
+                {/* Email */}
+                <div className="input-block">
+                  <Form.Label>Email / Username</Form.Label>
+                  <div className="glass-input">
+                    <Form.Control
+                      className="input-inner"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                </div>
+
+                {/* Password */}
+                <div className="input-block">
+                  <Form.Label>Password</Form.Label>
+                  <div className="glass-input">
+                    <Form.Control
+                      type="password"
+                      className="input-inner"
+                      placeholder="Enter password"
+                    />
+                  </div>
+                </div>
+
+                <Button type="submit" className="btn-login w-100 mb-2 mt-3" href="/Pages/Dashboard/Dashboard">
+                  Log In
+                </Button>
+
+                <div className="text-center">
+                  <a className="forgot-link" href="#">
+                    Forgot Password?
+                  </a>
+                </div>
+
+              </Form>
+            </div>
+
+            {/* RIGHT — IMAGE */}
+            <div className="col-md-6 text-center">
+              <img
+                src="/public/Login/hero-2.png"
+                alt="Books Illustration"
+                className="illustration-img"
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="password" className="form-label">Password</label>
-              <div className="password-wrap">
-                <input
-                  id="password"
-                  name="password"
-                  type={showPass ? "text" : "password"}
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="form-control"
-                  placeholder="Enter your password"
-                  aria-required="true"
-                />
-                <button
-                  type="button"
-                  className="toggle-pass"
-                  onClick={() => setShowPass((s) => !s)}
-                  aria-pressed={showPass}
-                  aria-label={showPass ? "Hide password" : "Show password"}
-                >
-                  {showPass ? "Hide" : "Show"}
-                </button>
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-check">
-                <input id="remember" type="checkbox" className="form-check-input" />
-                <label htmlFor="remember" className="form-check-label">Remember me</label>
-              </div>
-              <Link to="/forgot" className="forgot-link">Forgot?</Link>
-            </div>
-
-            <button className="btn-primary btn-submit" type="submit">Login</button>
-          </form>
-
-          <p className="signup-text">
-            New here? <Link to="/CreateAccount">Create an account</Link>
-          </p>
+          </div>
         </div>
-      </main>
+
+      </div>
     </div>
   );
-}
+};
+
+export default LoginPage;
